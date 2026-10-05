@@ -37,6 +37,23 @@
   .slot-actions { display: flex; gap: 8px; }
   .name { font-size: 1.35rem; font-weight: 700; margin: 2px 0 6px; min-height: 1.8em; }
   .rolling .name { color: var(--muted); }
+
+  /* Rolling animation: a slot-machine reel that slows down, a wobbling card, spinning dice, and a bouncy landing */
+  .slot { transition: border-color .2s, box-shadow .2s; }
+  .slot.rolling { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); animation: wobble .3s ease-in-out infinite; }
+  .name.spin { animation: reel .12s ease-out; filter: blur(.7px); }
+  .body.land { animation: pop .55s cubic-bezier(.2, 1.5, .4, 1); }
+  .body.land .chips, .body.land .tip, .body.land .links { animation: fadeUp .45s ease-out both; }
+  .body.land .tip { animation-delay: .06s; }
+  .body.land .links { animation-delay: .12s; }
+  .dice { display: inline-block; }
+  .slot.rolling .dice, body.busy #rollAll .dice { animation: diceSpin .5s linear infinite; }
+  @keyframes reel { from { transform: translateY(-55%); opacity: .15; } to { transform: none; opacity: 1; } }
+  @keyframes pop { 0% { transform: scale(.9); opacity: .4; } 60% { transform: scale(1.04); opacity: 1; } 100% { transform: scale(1); } }
+  @keyframes fadeUp { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-.35deg); } 75% { transform: rotate(.35deg); } }
+  @keyframes diceSpin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .85rem; }
   .tip { color: var(--muted); font-size: .95rem; margin: 0 0 12px; }
@@ -63,7 +80,7 @@
       <p class="sub">Each slot has its own Reroll button, so you can keep what you like (Lock) and reroll the rest. Each result comes with video and recipe links.</p>
     </div>
     <div class="toolbar">
-      <button class="primary" id="rollAll">🎲 Reroll all</button>
+      <button class="primary" id="rollAll"><span class="dice">🎲</span> Reroll all</button>
       <button id="theme" aria-label="Toggle theme">Theme</button>
     </div>
   </header>
@@ -230,21 +247,41 @@ function roll(key, animate) {
   if (locked[key]) return;
   var box = document.getElementById("slot-" + key);
   var final = choose(key);
-  if (!animate || !final) { setResult(key, final); return; }
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!animate || !final || reduce) { setResult(key, final); return; }
+  if (box._rolling) return;
+  box._rolling = true;
+  activeRolls++;
+  document.body.classList.add("busy");
   box.classList.add("rolling");
+  var btn = box.querySelector("button.primary");
+  btn.disabled = true;
   var pool = RECIPES[key];
-  var n = 0;
-  var timer = setInterval(function () {
+  var body = box.querySelector(".body");
+  var steps = 16, i = 0, delay = 50;
+  function tick() {
     var p = pool[pickRandom(pool.length)];
-    box.querySelector(".body").innerHTML = "";
-    box.querySelector(".body").appendChild(el("div", { class: "name", text: p.n }));
-    if (++n >= 9) {
-      clearInterval(timer);
+    body.innerHTML = "";
+    body.appendChild(el("div", { class: "name spin", text: p.n }));
+    i++;
+    if (i >= steps) {
+      box._rolling = false;
+      activeRolls--;
+      if (!activeRolls) document.body.classList.remove("busy");
       box.classList.remove("rolling");
+      btn.disabled = false;
       setResult(key, final);
+      body.classList.remove("land");
+      void body.offsetWidth;       // restart the animation if it is still applied
+      body.classList.add("land");
+      return;
     }
-  }, 70);
+    delay += 12;                   // the reel slows down as it settles
+    setTimeout(tick, delay);
+  }
+  tick();
 }
+var activeRolls = 0;
 function setResult(key, r) {
   state[key] = r;
   if (r) prev[key] = r.n;
@@ -278,7 +315,7 @@ function build() {
           return b;
         })(),
         (function () {
-          var b = el("button", { class: "primary", text: "🎲 Reroll" });
+          var b = el("button", { class: "primary" }, [el("span", { class: "dice", text: "🎲" }), document.createTextNode(" Reroll")]);
           b.addEventListener("click", function () { roll(s.key, true); });
           return b;
         })()
@@ -291,7 +328,7 @@ function build() {
 }
 
 document.getElementById("rollAll").addEventListener("click", function () {
-  SLOTS.forEach(function (s) { roll(s.key, true); });
+  SLOTS.forEach(function (s, i) { setTimeout(function () { roll(s.key, true); }, i * 180); });
 });
 ["fEgg", "fBox", "fFreeze", "fTravel"].forEach(function (id) {
   document.getElementById(id).addEventListener("change", function () {
