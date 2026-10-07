@@ -69,15 +69,112 @@
   details { margin-top: 20px; }
   summary { cursor: pointer; color: var(--muted); }
   .note { font-size: .85rem; color: var(--muted); margin-top: 24px; }
+
+  /* View all: a separate full-screen view with sticky category tabs */
+  body.view-all #home { display: none; }
+  .screen { max-width: 920px; margin: 0 auto; min-height: 100vh; }
+  .screen[hidden] { display: none; }
+  .screen-head { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top); }
+  .topbar { display: flex; align-items: center; gap: 12px; padding: 10px 16px 4px; }
+  .back { min-height: 44px; }
+  .screen-title { margin: 0; font-size: 1.2rem; }
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 6px 16px 10px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; min-height: 44px; border-radius: 999px; padding: 8px 16px; white-space: nowrap; }
+  .tab[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .tabs.searching .tab { opacity: .5; }
+  .tab .count { opacity: .75; margin-left: 6px; font-size: .85rem; }
+  .screen-body { padding: 12px 16px calc(40px + env(safe-area-inset-bottom)); }
+  .search { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 16px; margin-bottom: 8px; }
+  .all-head { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 18px 0 8px; }
+  .all-head[hidden], .cat[hidden], .item[hidden], .empty[hidden] { display: none; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; padding: 0 14px; }
+  .item summary { display: flex; justify-content: space-between; align-items: center; gap: 4px 12px; flex-wrap: wrap; min-height: 48px; padding: 10px 0; color: var(--ink); }
+  .item summary .n { font-weight: 600; }
+  .item summary .meta { color: var(--muted); font-size: .85rem; }
+  .item[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+  .item .inner { padding-bottom: 14px; }
+  .use { margin-top: 12px; min-height: 44px; }
+  @media (max-width: 560px) {
+    .item summary { flex-direction: column; align-items: flex-start; }
+    .use { width: 100%; }
+    .links a { padding: 10px 14px; }
+  }
   @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } .slot.wide { grid-column: 1 / -1; } }
+
+  /* Bottom navigation, pantry, cook and ingredient styles */
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+  #nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; justify-content: center; gap: 4px; background: var(--card); border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+  #nav button { flex: 1; max-width: 160px; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 0; background: transparent; font-size: .8rem; color: var(--muted); border-radius: 12px; }
+  #nav button .ico { font-size: 1.25rem; line-height: 1; }
+  #nav button[aria-current="page"] { color: var(--accent); background: var(--chip); font-weight: 600; }
+  #toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 30; background: var(--ink); color: var(--bg); padding: 10px 14px; border-radius: 12px; display: flex; gap: 12px; align-items: center; max-width: calc(100% - 32px); }
+  #toast[hidden] { display: none; }
+  #toast button { background: transparent; border: 0; color: var(--accent); font-weight: 700; padding: 4px 8px; min-height: 36px; }
+  .add-row { display: flex; gap: 8px; align-items: flex-start; }
+  .add-row .search { flex: 1; margin-bottom: 8px; }
+  .add-row button { min-height: 44px; }
+  .field-label { display: block; font-size: .85rem; color: var(--muted); margin: 4px 0 6px; }
+  .field { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 16px; margin-bottom: 10px; }
+  .hint { color: var(--muted); font-size: .88rem; }
+  .storage-note { background: var(--chip); border-radius: 10px; padding: 10px 12px; color: var(--ink); }
+  .storage-note[hidden], .screen section[hidden], .field[hidden] { display: none; }
+  .action-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 4px; }
+  .action-row button { min-height: 44px; }
+  .chips-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+  .ing-chip, .sugg, .have-chip { min-height: 44px; padding: 8px 14px; border-radius: 999px; background: var(--card); }
+  .ing-chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .ing-chip[aria-pressed="true"]::before { content: "✓ "; }
+  .sugg { border-color: var(--accent); color: var(--accent); }
+  .sugg::before { content: "+ "; }
+  .have-chip { background: var(--chip); }
+  .have-chip::after { content: " ✕"; color: var(--muted); }
+  .have-box { margin: 4px 0 12px; }
+  .have-box summary { min-height: 44px; display: flex; align-items: center; }
+  .have-box summary::after { content: "▾"; margin-left: 8px; transition: transform .2s; }
+  .have-box[open] summary::after { transform: rotate(180deg); }
+  .sec-title { display: flex; justify-content: space-between; align-items: baseline; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 20px 0 8px; }
+  .sec-title .sub-count { font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .item summary .need { flex-basis: 100%; color: var(--accent); font-size: .88rem; }
+  .item summary .ready { flex-basis: 100%; color: var(--ok); font-size: .88rem; }
+  .ing { margin: 4px 0 12px; }
+  .ing-title { margin: 0 0 6px; font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .ing ul { list-style: none; margin: 0; padding: 0; }
+  .ing li { display: flex; gap: 10px; padding: 4px 0; font-size: .95rem; }
+  .ing li .mark { width: 1.2em; flex: 0 0 1.2em; text-align: center; color: var(--muted); }
+  .ing li.have .mark { color: var(--ok); }
+  .ing li.miss .mark { color: var(--accent); }
+  .ing li.opt { color: var(--muted); }
+  .ing li .qty { color: var(--muted); }
+  .ing-details { margin: 8px 0 12px; }
+  .ing-details summary { min-height: 44px; display: flex; align-items: center; }
+  .need-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 10px; }
+  .need-actions button { min-height: 44px; }
+  .fz-form { margin-bottom: 16px; }
+  .fz-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fz-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; }
+  .fz-card .nm { font-weight: 600; }
+  .fz-card .age { font-size: .85rem; color: var(--muted); }
+  .fz-card .age.warn { color: #b7791f; }
+  .fz-card .age.old { color: #c53030; font-weight: 600; }
+  .stepper { display: flex; align-items: center; gap: 4px; }
+  .stepper button { width: 44px; min-height: 44px; padding: 0; font-size: 1.25rem; }
+  .stepper .q { min-width: 2.2em; text-align: center; font-weight: 700; }
+  .fz-del { min-height: 44px; }
+  .backup { margin-top: 28px; }
+  .backup summary { min-height: 44px; display: flex; align-items: center; }
+  .show-more { width: 100%; min-height: 48px; margin: 4px 0 12px; }
+  .empty-state { text-align: center; color: var(--muted); padding: 24px 8px; }
+  .empty-state button { margin-top: 10px; min-height: 44px; }
+  .slot .frz-chip, .chip.frz { background: color-mix(in srgb, var(--accent) 18%, var(--chip)); }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="home">
   <header>
     <div>
       <h1>Meal Roller</h1>
-      <p class="sub">Each slot has its own Reroll button, so you can keep what you like (Lock) and reroll the rest. Each result comes with video and recipe links.</p>
+      <p class="sub">Each slot has its own Reroll button, so you can keep what you like (Lock) and reroll the rest. Each result comes with ingredients, video and recipe links.</p>
     </div>
     <div class="toolbar">
       <button class="primary" id="rollAll"><span class="dice">🎲</span> Reroll all</button>
@@ -91,14 +188,109 @@
 
   <details>
     <summary>Filters</summary>
+    <p><label><input type="checkbox" id="fPantry"> Only what I can make now from my pantry, or have in the freezer</label></p>
     <p><label><input type="checkbox" id="fEgg"> Skip egg dishes</label></p>
     <p><label><input type="checkbox" id="fBox"> Only lunch-box friendly (lunch &amp; breakfast)</label></p>
     <p><label><input type="checkbox" id="fFreeze"> Only freezer-friendly</label></p>
     <p><label><input type="checkbox" id="fTravel"> Snacks that travel well (dry, no fridge)</label></p>
   </details>
 
-  <p class="note">Nutrition numbers are per adult serving and are estimates (about ±15%). The video links come from YouTube search results and may use more oil, salt or butter than your plan, so cut those back. "Web search" opens a Google search for a written recipe. Both adults should keep salt under 5 g a day, and follow the doctor's advice for hypertension.</p>
+  <p class="note">Nutrition numbers are per adult serving and are estimates (about ±15%). Ingredient quantities are for 3 people (2 adults and the toddler) and are home-style estimates, not copied from the videos. The video links come from YouTube search results and may use more oil, salt or butter than your plan, so cut those back. "Web search" opens a Google search for a written recipe. Both adults should keep salt under 5 g a day, and follow the doctor's advice for hypertension.</p>
 </div>
+
+<div id="cook" class="screen" hidden>
+  <div class="screen-head">
+    <div class="topbar"><h1 class="screen-title">What can I make?</h1></div>
+    <div class="tabs" id="cookTabs" role="tablist" aria-label="Meal category"></div>
+  </div>
+  <main class="screen-body">
+    <label class="field-label" for="cookAdd">Add what you have</label>
+    <div class="add-row">
+      <input type="search" class="search" id="cookAdd" placeholder="Type one or many: paneer, rava, curd..." enterkeyhint="done" autocomplete="off">
+      <button class="primary" id="cookAddBtn">Add</button>
+    </div>
+    <div class="chips-row" id="cookSuggest" aria-live="polite"></div>
+    <details class="have-box" id="cookHaveBox">
+      <summary id="cookHaveSummary">My ingredients</summary>
+      <div class="chips-row" id="cookHave"></div>
+    </details>
+    <div id="cookResults"></div>
+  </main>
+</div>
+
+<div id="pantry" class="screen" hidden>
+  <div class="screen-head">
+    <div class="topbar"><h1 class="screen-title">Pantry</h1></div>
+    <div class="tabs" id="pantryTabs" role="tablist" aria-label="Pantry section">
+      <button class="tab" role="tab" data-pt="ing">Ingredients <span class="count" id="pcIng">0</span></button>
+      <button class="tab" role="tab" data-pt="frz">Freezer <span class="count" id="pcFrz">0</span></button>
+    </div>
+  </div>
+  <main class="screen-body">
+    <p class="storage-note" id="storageNote" hidden>This browser isn't saving data (private mode or blocked storage), so your pantry will reset when you close the page.</p>
+
+    <section id="pIng">
+      <input type="search" class="search" id="pSearch" placeholder="Search ingredients" aria-label="Search ingredients" autocomplete="off">
+      <div class="action-row">
+        <button id="pUsual">Add my usual groceries</button>
+        <button id="pClear">Clear all</button>
+      </div>
+      <div id="pGroups"></div>
+      <p class="hint">Assumed always in your kitchen, so not listed: <span id="stapleList"></span>.</p>
+    </section>
+
+    <section id="pFrz" hidden>
+      <div class="fz-form">
+        <label class="field-label" for="fzRecipe">What did you freeze?</label>
+        <select id="fzRecipe" class="field"></select>
+        <input type="text" id="fzName" class="field" placeholder="Name (e.g. Methi chapatis)" hidden>
+        <div class="fz-row">
+          <div>
+            <label class="field-label" for="fzQty">How many</label>
+            <input type="number" id="fzQty" class="field" min="1" value="6" inputmode="numeric">
+          </div>
+          <div>
+            <label class="field-label" for="fzDate">Frozen on</label>
+            <input type="date" id="fzDate" class="field">
+          </div>
+        </div>
+        <button class="primary" id="fzAdd">Add to freezer</button>
+      </div>
+      <div id="fzList"></div>
+      <p class="hint">Use frozen cooked food within about 1 month. Cooked items freeze flat in portions. Don't refreeze once thawed.</p>
+    </section>
+
+    <details class="backup">
+      <summary>Backup and restore</summary>
+      <p class="hint">Your pantry and freezer are saved on this device only. Export a file to move it to another device or keep a copy.</p>
+      <div class="action-row">
+        <button id="invExport">Export</button>
+        <button id="invImport">Import</button>
+        <input type="file" id="invFile" accept="application/json,.json" hidden>
+      </div>
+    </details>
+  </main>
+</div>
+
+<div id="all" class="screen" hidden>
+  <div class="screen-head">
+    <div class="topbar"><h1 class="screen-title">All recipes</h1></div>
+    <div class="tabs" id="allTabs" role="tablist" aria-label="Meal category"></div>
+  </div>
+  <main class="screen-body">
+    <input type="search" class="search" id="allSearch" placeholder="Search recipes or ingredients (paneer, rava, freezer...)" aria-label="Search recipes" enterkeyhint="search" autocomplete="off">
+    <div id="allList"></div>
+    <p class="empty" id="allEmpty" hidden>No recipes match your search.</p>
+  </main>
+</div>
+
+<nav id="nav" aria-label="Main">
+  <button data-go="roll" aria-current="page"><span class="ico">🎲</span><span>Roll</span></button>
+  <button data-go="cook"><span class="ico">🍳</span><span>Cook</span></button>
+  <button data-go="pantry"><span class="ico">🧺</span><span>Pantry</span></button>
+  <button data-go="all"><span class="ico">📋</span><span>All</span></button>
+</nav>
+<div id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
 // Recipe data. kcal, protein (g), fibre (g) are per adult serving, estimated.
@@ -116,6 +308,8 @@ var RECIPES = {
     { n: "Egg bhurji with mushroom and capsicum", k: 290, p: 19, f: 4, egg: 1, tip: "Serve with 1 multigrain toast or ragi roti. Go light on butter.", v: [["Mushroom egg bhurji", Y("i_no6uWW-Gs")], ["Spicy mushroom egg bhurji", Y("APvAn_83qf4")]] },
     { n: "Protein smoothie with chia", k: 280, p: 28, f: 6, tip: "Milk + banana + chia + 1 scoop Cosmix. Skip the scoop for the toddler.", v: [["Banana chia seed smoothie", Y("q9SToa5-yvo")], ["Banana chia milk smoothie", Y("c7YDH0SRt80")]] },
     { n: "Chia milk pudding bowl", k: 220, p: 10, f: 8, box: 1, tip: "Make it the night before. Top with seeds, nuts and fruit.", v: [["Chia seeds pudding", Y("UDzwBTcu2pg")], ["Perfect chia pudding", Y("Bu8-N-WsTng")], ["Chia pudding in 5 minutes", Y("8wvgz2okLp0")]] },
+    { n: "Paneer bhurji with roti or toast", k: 330, p: 18, f: 4, box: 1, tip: "Crumble 150-200 g paneer with onion, tomato, capsicum, turmeric and pepper. Serve with a chapati or ragi roti, or sourdough toast. Also works as a tortilla filling. Light on oil and salt.", v: [["Easiest 15 minute high-protein paneer bhurji", Y("az8nd6jdggI")], ["Paneer bhurji", "https://m.youtube.com/watch?v=E2iNXEz5WTM"], ["Paneer bhurji recipe", Y("q7z1h6emCKc")]] },
+    { n: "Egg kathi roll (chapati egg roll)", k: 340, p: 16, f: 4, egg: 1, box: 1, frz: 1, tip: "Cook a thin beaten-egg layer on a whole-wheat chapati or tortilla, fill with onion, capsicum, mint-curd sauce and lemon, and roll in foil. Use a plain chapati, not a fried layered paratha. Freeze wrapped in foil and reheat in the air fryer.", v: [["Egg roll (Kolkata style)", Y("p_Lq7l8JCYY")], ["Chapati egg roll", Y("iANqMCrLnWQ")], ["Kolkata egg roll recipe", Y("84iZjEzqpRE")]] },
     { n: "Air-fried falafel wrap (3 falafel)", k: 380, p: 15, f: 8, box: 1, frz: 1, tip: "Use soaked dry chickpeas (canned are salty). Air-fry at 180 °C for 12-15 minutes, wrap in a whole-wheat chapati with veg and a curd-garlic sauce. Freeze shaped falafel and air-fry from frozen.", v: [["Healthy air-fryer falafel", Y("-GBJ1Go_mrQ")], ["Oil-free air fryer falafel", Y("WFA3Aa2cUao")], ["Air fryer falafel with tahini sauce", Y("6Xb7zAoAYOA")]] },
   ],
   lunch: [
@@ -134,6 +328,7 @@ var RECIPES = {
     { n: "Veg curd rice with sprouts salad", k: 330, p: 13, f: 6, box: 1, tip: "Light and toddler-friendly. Add pomegranate.", v: [["South Indian curd rice", Y("uDow6JvyBu4")], ["Vegetable curd rice", Y("B_5i2xvDvRQ")], ["3 ways curd rice", Y("lOT9Gz1z8Bo")]] },
     { n: "Freezer burrito: egg + rajma + veg", k: 420, p: 20, f: 9, egg: 1, box: 1, frz: 1, tip: "Whole-wheat tortilla, egg bhurji, rajma or chana, capsicum, a little paneer, curd-garlic sauce. Freeze wrapped, microwave 2 minutes, crisp in the air fryer. Skip cheese.", v: [["High-protein freezer burritos (veg)", Y("kmGtSc0jJ84")], ["Freezer-prep veggie burritos", Y("vgxr4QtQlDM")], ["Egg and black bean burritos", Y("M2gsvHk4xNk")]] },
     { n: "Paneer tikka wrap", k: 360, p: 20, f: 5, box: 1, tip: "Air-fried paneer tikka, onion, capsicum, cucumber and mint-curd sauce in a whole-wheat tortilla. Make the tikka ahead, assemble fresh.", v: [["Paneer kathi roll (100% atta)", Y("V5D-UQC4Ts0")], ["Paneer tikka kathi roll", Y("vqoRqv1EtyA")], ["Paneer kathi roll, easy and healthy", Y("uACIRXhRZks")]] },
+    { n: "Palak paneer with 2 chapatis", k: 400, p: 20, f: 8, box: 1, tip: "Blanch spinach, blend with green chilli and ginger, cook with onion-tomato and add paneer at the end. No cream: a spoon of curd or milk is enough. Air-fry the paneer cubes first for less oil. Light salt.", v: [["Healthy palak paneer without cream", Y("Ka993Qg119Q")], ["Healthy palak paneer, high protein", Y("4Ddo_rQIC8g")], ["Zero oil palak paneer", Y("Qs77jYVU5tc")]] },
     { n: "Broccoli-corn-paneer stuffed paratha with raita", k: 350, p: 17, f: 6, box: 1, frz: 1, tip: "Cook about 80%, freeze flat, air-fry to reheat.", v: [["Broccoli paneer paratha", Y("YiF_GXp4I8c")], ["Broccoli paneer paratha (lunchbox)", Y("X-nqEoxf968")], ["Corn paneer stuffed paratha", Y("HkfVujfQjsE")]] }
   ],
   snack: [
@@ -159,28 +354,220 @@ var RECIPES = {
     { n: "Mini egg muffins (air fryer)", k: 150, p: 12, f: 1, egg: 1, frz: 1, tip: "170 °C for 8-10 minutes. They freeze well.", v: [["Air fryer egg muffins, 3 ways", "https://www.youtube.com/watch?v=FWBcQybLCEo"], ["Air fryer egg muffins", Y("IhtmTmGO5Xc")], ["Egg muffins, 4 meal-prep recipes", Y("Ev9QcU-EmGc")]] }
   ]
 };
-var SLOTS = [
-  { key: "breakfast", title: "Breakfast" },
-  { key: "lunch", title: "Lunch / lunch box" },
-  { key: "snack", title: "Evening snack" },
-  { key: "toddler", title: "Toddler egg idea (his 2 eggs)", wide: true }
+// Ingredient catalog: [key, label, group, search aliases]
+var CATALOG = [
+  ["onion", "Onion", "Vegetables", "pyaz"],
+  ["tomato", "Tomato", "Vegetables", ""],
+  ["capsicum", "Capsicum", "Vegetables", "bell pepper"],
+  ["lauki", "Bottle gourd (lauki)", "Vegetables", "dudhi sorakaya"],
+  ["garlic", "Garlic", "Vegetables", "lahsun"],
+  ["ginger", "Ginger", "Vegetables", "adrak"],
+  ["greenchilli", "Green chilli", "Vegetables", "mirchi"],
+  ["bajjichilli", "Bajji chilli", "Vegetables", "mirchi bajji"],
+  ["carrot", "Carrot", "Vegetables", "gajar"],
+  ["peas", "Peas (frozen)", "Vegetables", "matar green peas"],
+  ["corn", "Sweet corn (frozen)", "Vegetables", "makka"],
+  ["babycorn", "Baby corn", "Vegetables", ""],
+  ["mushroom", "Mushroom", "Vegetables", ""],
+  ["beetroot", "Beetroot", "Vegetables", "beet"],
+  ["brinjal", "Brinjal / eggplant", "Vegetables", "baingan aubergine"],
+  ["thinbrinjal", "Thin brinjal", "Vegetables", "small brinjal"],
+  ["cauliflower", "Cauliflower", "Vegetables", "gobi"],
+  ["broccoli", "Broccoli", "Vegetables", ""],
+  ["spinach", "Spinach", "Vegetables", "palak"],
+  ["methi", "Methi leaves", "Vegetables", "fenugreek"],
+  ["cabbage", "Cabbage", "Vegetables", "patta gobi"],
+  ["beans", "French beans", "Vegetables", "green beans"],
+  ["drumstick", "Drumstick", "Vegetables", "moringa"],
+  ["cucumber", "Cucumber", "Vegetables", "kheera"],
+  ["springonion", "Spring onion", "Vegetables", "scallion"],
+  ["lemon", "Lemon", "Vegetables", "nimbu lime"],
+  ["coriander", "Coriander leaves", "Herbs", "cilantro dhania"],
+  ["curryleaves", "Curry leaves", "Herbs", "kadi patta"],
+  ["mint", "Mint", "Herbs", "pudina"],
+  ["eggs", "Eggs", "Protein & dairy", "egg anda"],
+  ["paneer", "Paneer", "Protein & dairy", "cottage cheese"],
+  ["milk", "Milk", "Protein & dairy", "goodlife"],
+  ["curd", "Curd", "Protein & dairy", "yogurt dahi"],
+  ["protein", "Protein powder (Cosmix)", "Protein & dairy", "cosmix whey"],
+  ["soya", "Soya chunks / granules", "Protein & dairy", "meal maker nutrela"],
+  ["cheese", "Cheese", "Protein & dairy", ""],
+  ["rice", "Rice (white)", "Grains & flours", "chawal"],
+  ["brownrice", "Brown rice", "Grains & flours", ""],
+  ["millet", "Millet (foxtail / little)", "Grains & flours", "siridhanya"],
+  ["ragi", "Ragi flour", "Grains & flours", "finger millet nachni"],
+  ["rava", "Rava / sooji", "Grains & flours", "semolina"],
+  ["atta", "Whole-wheat flour (atta)", "Grains & flours", "chapati wheat"],
+  ["besan", "Besan (gram flour)", "Grains & flours", "chickpea flour"],
+  ["jowar", "Jowar flour", "Grains & flours", "sorghum"],
+  ["oats", "Rolled oats", "Grains & flours", ""],
+  ["tortilla", "Whole-wheat tortillas", "Grains & flours", "wraps"],
+  ["bread", "Sourdough bread", "Grains & flours", "toast"],
+  ["dosabatter", "Dosa batter (ready-made)", "Grains & flours", "idli"],
+  ["moongdal", "Moong dal (split)", "Dals & legumes", "green gram"],
+  ["toordal", "Toor dal", "Dals & legumes", "arhar pigeon pea"],
+  ["chickpeas", "Chickpeas (dry, kabuli chana)", "Dals & legumes", "chana chole"],
+  ["rajma", "Rajma", "Dals & legumes", "kidney beans"],
+  ["sprouts", "Moong sprouts", "Dals & legumes", "sprouted"],
+  ["roastedchana", "Roasted chana", "Dals & legumes", "pottukadalai"],
+  ["banana", "Banana", "Fruit, nuts & seeds", ""],
+  ["almonds", "Almonds", "Fruit, nuts & seeds", "badam nuts"],
+  ["pumpkinseeds", "Pumpkin seeds", "Fruit, nuts & seeds", "seeds"],
+  ["dates", "Dates", "Fruit, nuts & seeds", "khajur"],
+  ["chia", "Chia seeds", "Fruit, nuts & seeds", ""],
+  ["isabgol", "Isabgol (psyllium husk)", "Fruit, nuts & seeds", "psyllium"],
+  ["makhana", "Makhana (fox nuts)", "Fruit, nuts & seeds", "lotus seeds"],
+  ["cocoa", "Cocoa powder", "Fruit, nuts & seeds", "cacao"],
+  ["pomegranate", "Pomegranate", "Fruit, nuts & seeds", "anar"],
+  ["tamarind", "Tamarind", "Other", "imli"],
+  ["sambarpowder", "Sambar powder", "Other", ""],
+  ["soysauce", "Soy sauce", "Other", ""]
 ];
+var GROUPS = ["Vegetables", "Herbs", "Protein & dairy", "Grains & flours", "Dals & legumes", "Fruit, nuts & seeds", "Other"];
+// Tap "Add my usual groceries" in the Pantry to add these.
+var USUAL = ["onion", "tomato", "capsicum", "lauki", "garlic", "ginger", "greenchilli", "bajjichilli", "carrot", "peas", "corn", "babycorn", "mushroom", "beetroot", "brinjal", "thinbrinjal", "cauliflower", "broccoli", "eggs", "paneer", "milk", "protein", "makhana", "isabgol", "chia", "bread"];
+var STAPLES = "salt, oil, ghee, butter, turmeric, red chilli powder, coriander powder, jeera, mustard seeds, pepper, garam masala, amchur, hing, whole spices and baking soda";
+
+// Ingredients per recipe, for 3 people (2 adults + toddler). [ingredient key or [any-of keys], quantity, optional/to serve = 1]
+var RECIPE_ING = {
+  "Besan-veg chilla with curd": [["besan", "¾ cup"], ["onion", "1"], ["carrot", "1"], ["coriander", "2 tbsp"], ["curd", "1½ cups"], ["spinach", "1 handful", 1], ["greenchilli", "1", 1], ["isabgol", "½ tsp", 1]],
+  "Paneer-stuffed moong dal chilla": [["moongdal", "¾ cup, soaked"], ["paneer", "100 g"], ["ginger", "1 inch"], ["greenchilli", "1"], ["onion", "½", 1], ["coriander", "2 tbsp", 1]],
+  "Ragi dosa": [["ragi", "1 cup"], ["curd", "½ cup"], ["onion", "1 small"], ["coriander", "2 tbsp"], ["greenchilli", "1", 1], ["curryleaves", "few", 1], ["tomato", "2, for chutney", 1], ["garlic", "2 cloves, for chutney", 1]],
+  "Egg dosa (2) with sambar and chutney": [["dosabatter", "1½ cups"], ["eggs", "2"], ["coriander", "1 tbsp", 1], ["toordal", "½ cup, for sambar", 1], ["tomato", "1, for sambar", 1], ["carrot", "1, for sambar", 1], ["beans", "6, for sambar", 1], ["tamarind", "small lump, for sambar", 1], ["sambarpowder", "1½ tsp, for sambar", 1], ["mint", "1 handful, for chutney", 1]],
+  "Paneer bhurji dosa (2) with sambar": [["dosabatter", "1½ cups"], ["paneer", "100 g"], ["onion", "1"], ["tomato", "1"], ["capsicum", "½"], ["coriander", "2 tbsp", 1], ["toordal", "½ cup, for sambar", 1], ["carrot", "1, for sambar", 1], ["beans", "6, for sambar", 1], ["tamarind", "small lump, for sambar", 1], ["sambarpowder", "1½ tsp, for sambar", 1]],
+  "Veg rava idli (3) with sambar": [["rava", "1½ cups"], ["curd", "1 cup"], ["carrot", "1"], ["peas", "¼ cup"], ["beans", "6"], ["curryleaves", "few"], ["ginger", "1 inch"], ["greenchilli", "1"], ["coriander", "2 tbsp", 1], ["toordal", "½ cup, for sambar", 1], ["sambarpowder", "1½ tsp, for sambar", 1], ["tamarind", "small lump, for sambar", 1]],
+  "Veg masala omelette wrap": [["eggs", "4"], [["atta", "tortilla"], "2-3 chapatis or tortillas"], ["capsicum", "½"], ["tomato", "1"], ["onion", "1"], ["coriander", "2 tbsp", 1]],
+  "Egg bhurji with mushroom and capsicum": [["eggs", "4"], ["mushroom", "100 g"], ["capsicum", "½"], ["onion", "1"], ["tomato", "1"], ["coriander", "2 tbsp", 1], [["bread", "ragi", "atta"], "toast or roti, to serve", 1]],
+  "Protein smoothie with chia": [["milk", "2 glasses"], ["banana", "1"], ["chia", "2 tbsp"], ["protein", "2 scoops (adults only)"]],
+  "Chia milk pudding bowl": [["milk", "1½ cups"], ["chia", "4 tbsp"], ["almonds", "a few, to top", 1], ["pumpkinseeds", "1 tbsp, to top", 1], ["banana", "1, to top", 1]],
+  "Air-fried falafel wrap (3 falafel)": [["chickpeas", "1 cup, soaked overnight"], ["onion", "1"], ["garlic", "4 cloves"], ["coriander", "1 bunch"], ["besan", "2 tbsp"], [["tortilla", "atta"], "3 tortillas or chapatis"], ["cucumber", "1", 1], ["tomato", "1", 1], ["cabbage", "1 cup shredded", 1], ["curd", "½ cup, for sauce", 1]],
+  "Paneer bhurji with roti or toast": [["paneer", "200 g"], ["onion", "1"], ["tomato", "1"], ["capsicum", "½"], ["greenchilli", "1"], ["coriander", "2 tbsp", 1], [["atta", "ragi", "bread", "tortilla"], "chapati, roti, toast or tortilla, to serve", 1]],
+  "Egg kathi roll (chapati egg roll)": [["eggs", "4"], [["atta", "tortilla"], "3 chapatis or tortillas"], ["onion", "1"], ["capsicum", "½"], ["curd", "½ cup, for sauce", 1], ["mint", "1 handful, for sauce", 1], ["lemon", "1", 1], ["greenchilli", "1", 1]],
+
+  "Soya-veg pulao (millet or brown rice)": [[["brownrice", "millet", "rice"], "1½ cups"], ["soya", "¾ cup"], ["onion", "1"], ["carrot", "1"], ["beans", "6"], ["peas", "½ cup"], ["tomato", "1"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["mint", "1 handful", 1], ["curd", "1 cup, for raita", 1], ["cucumber", "1, for raita", 1]],
+  "Paneer-mushroom-capsicum pulao": [[["brownrice", "millet", "rice"], "1½ cups"], ["paneer", "150 g"], ["mushroom", "100 g"], ["capsicum", "1"], ["onion", "1"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["peas", "½ cup", 1]],
+  "Egg fried rice with vegetables": [[["brownrice", "millet", "rice"], "2 cups cooked, cooled"], ["eggs", "3"], ["cabbage", "1 cup"], ["carrot", "1"], ["beans", "6"], ["garlic", "3 cloves"], ["springonion", "2", 1], ["soysauce", "½ tsp", 1]],
+  "Chana masala with 2 chapatis and salad": [["chickpeas", "1 cup, soaked and cooked"], ["onion", "2"], ["tomato", "3"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["atta", "1½ cups"], ["cucumber", "1, for salad", 1], ["lemon", "1", 1]],
+  "Rajma bowl with brown rice and salad": [["rajma", "1 cup, soaked and cooked"], ["onion", "2"], ["tomato", "3"], ["ginger", "1 inch"], ["garlic", "4 cloves"], [["brownrice", "rice", "millet"], "1½ cups"], ["cucumber", "1, for salad", 1], ["coriander", "2 tbsp", 1]],
+  "Dal with beans-carrot poriyal and 2 chapatis": [[["toordal", "moongdal"], "1 cup"], ["tomato", "1"], ["onion", "1"], ["garlic", "3 cloves"], ["beans", "200 g"], ["carrot", "2"], ["atta", "1½ cups"], ["curryleaves", "few", 1]],
+  "Mushroom-paneer masala with 2 chapatis": [["mushroom", "200 g"], ["paneer", "150 g"], ["onion", "2"], ["tomato", "3"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["atta", "1½ cups"], ["coriander", "2 tbsp", 1]],
+  "Brinjal bharta with ragi or jowar roti": [[["brinjal", "thinbrinjal"], "2 large or 6 thin"], ["onion", "2"], ["tomato", "2"], ["garlic", "4 cloves"], ["greenchilli", "1"], [["ragi", "jowar", "atta"], "1½ cups flour, for roti"], ["coriander", "2 tbsp", 1]],
+  "Mixed-veg sambar with millet rice": [["toordal", "¾ cup"], ["tomato", "2"], ["onion", "1"], ["carrot", "1"], ["beans", "6"], ["thinbrinjal", "3", 1], ["drumstick", "1", 1], ["tamarind", "small lump"], ["sambarpowder", "2 tsp"], [["millet", "brownrice", "rice"], "1½ cups"], ["curryleaves", "few", 1]],
+  "Egg curry with chapatis and beetroot-carrot salad": [["eggs", "6"], ["onion", "2"], ["tomato", "3"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["atta", "1½ cups"], ["beetroot", "1, for salad", 1], ["carrot", "1, for salad", 1], ["coriander", "2 tbsp", 1]],
+  "Veg curd rice with sprouts salad": [[["rice", "millet", "brownrice"], "1½ cups cooked"], ["curd", "2 cups"], ["carrot", "1"], ["cucumber", "1"], ["curryleaves", "few"], ["greenchilli", "1"], ["ginger", "1 inch"], ["coriander", "2 tbsp", 1], ["pomegranate", "¼ cup", 1], ["sprouts", "1 cup, for salad", 1]],
+  "Broccoli-corn-paneer stuffed paratha with raita": [["atta", "2 cups"], ["broccoli", "1 cup, chopped fine"], ["corn", "½ cup"], ["paneer", "100 g"], ["greenchilli", "1"], ["coriander", "2 tbsp"], ["curd", "1 cup, for raita", 1], ["cucumber", "1, for raita", 1]],
+  "Paneer-cauliflower (gobi) stuffed paratha": [["atta", "2 cups"], ["cauliflower", "1 cup, grated"], ["paneer", "100 g"], ["greenchilli", "1"], ["ginger", "1 inch"], ["coriander", "2 tbsp"], ["curd", "1 cup, to serve", 1]],
+  "Air-fried lauki kofta in light gravy + 2 chapatis": [["lauki", "1 small, grated"], ["besan", "½ cup"], ["onion", "2"], ["tomato", "3"], ["ginger", "1 inch"], ["garlic", "4 cloves"], ["atta", "1½ cups"], ["coriander", "2 tbsp", 1]],
+  "Freezer burrito: egg + rajma + veg": [["tortilla", "3"], ["eggs", "4"], [["rajma", "chickpeas"], "¾ cup cooked"], ["capsicum", "1"], ["onion", "1"], ["paneer", "50 g", 1], ["coriander", "2 tbsp", 1], ["curd", "½ cup, for garlic sauce", 1]],
+  "Paneer tikka wrap": [["paneer", "200 g"], ["curd", "½ cup"], ["capsicum", "1"], ["onion", "1"], ["cucumber", "1"], [["tortilla", "atta"], "3 tortillas or chapatis"], ["ginger", "1 inch"], ["garlic", "3 cloves"], ["besan", "1 tbsp", 1], ["mint", "1 handful, for sauce", 1]],
+  "Palak paneer with 2 chapatis": [["spinach", "2 bunches (about 400 g)"], ["paneer", "150 g"], ["onion", "1"], ["tomato", "2"], ["garlic", "4 cloves"], ["ginger", "1 inch"], ["greenchilli", "1"], ["atta", "1½ cups"], ["curd", "2 tbsp, for creaminess", 1]],
+
+  "Roasted makhana": [["makhana", "3 cups"]],
+  "Sprouts chaat": [["sprouts", "2 cups"], ["onion", "½"], ["tomato", "1"], ["lemon", "1"], ["coriander", "2 tbsp"], ["cucumber", "½", 1], ["greenchilli", "1", 1]],
+  "Air-fried paneer tikka": [["paneer", "200 g"], ["curd", "½ cup"], ["capsicum", "1"], ["onion", "1"], ["ginger", "1 inch"], ["garlic", "3 cloves"], ["besan", "1 tbsp", 1]],
+  "Boiled egg + roasted chana plate": [["eggs", "3"], ["roastedchana", "1 cup"]],
+  "Baby corn and mushroom pepper fry": [["babycorn", "150 g"], ["mushroom", "150 g"], ["onion", "1"], ["garlic", "3 cloves"], ["greenchilli", "1"], ["capsicum", "½", 1], ["curryleaves", "few", 1]],
+  "Air-fried veg-dal cutlets": [["moongdal", "¾ cup, soaked"], ["beetroot", "1"], ["carrot", "1"], ["oats", "¼ cup"], ["onion", "1"], ["ginger", "1 inch"], ["greenchilli", "1"], ["coriander", "2 tbsp"]],
+  "Mini besan-veg cheela with mint-curd dip": [["besan", "¾ cup"], ["onion", "1"], ["carrot", "1"], ["coriander", "2 tbsp"], ["curd", "½ cup, for dip"], ["mint", "1 handful, for dip", 1]],
+  "Protein-chia energy balls (2)": [["dates", "12"], ["oats", "½ cup"], ["almonds", "¼ cup"], ["chia", "1 tbsp"], ["protein", "1 scoop (adults only)"], ["cocoa", "1 tbsp", 1]],
+  "Masala corn cup": [["corn", "1½ cups"], ["lemon", "1"], ["onion", "¼", 1], ["coriander", "1 tbsp", 1]],
+  "Air-fried tortilla pizza": [["tortilla", "2"], ["tomato", "2, for sauce"], ["garlic", "2 cloves"], ["paneer", "80 g"], ["mushroom", "50 g"], ["capsicum", "½"], ["babycorn", "2", 1], ["cheese", "a small sprinkle", 1]],
+  "Air-fried spiced chickpeas": [["chickpeas", "1 cup, soaked and cooked"]],
+  "Air-fried crunchy green peas": [["peas", "1½ cups"]],
+  "Air-fried moong dal namkeen": [["moongdal", "¾ cup, soaked and dried"]],
+  "Air-fried almond + seed mix": [["almonds", "25"], ["pumpkinseeds", "3 tbsp"], ["makhana", "1 cup"]],
+
+  "Banana-oat-cocoa pancakes": [["banana", "1-2"], ["eggs", "2"], ["oats", "⅓ cup"], ["cocoa", "1 tsp"], ["chia", "1 tsp, soaked", 1]],
+  "Veg omelette": [["eggs", "2"], ["carrot", "1 tbsp grated", 1], ["spinach", "1 tbsp chopped", 1], ["capsicum", "1 tbsp chopped", 1]],
+  "Soft scrambled eggs": [["eggs", "2"], ["bread", "1 slice, as toast fingers", 1]],
+  "Mini egg muffins (air fryer)": [["eggs", "6"], ["carrot", "1"], ["capsicum", "½"], ["spinach", "1 handful", 1], ["onion", "½", 1], ["coriander", "1 tbsp", 1]]
+};
+
+var SLOTS = [
+  { key: "breakfast", title: "Breakfast", short: "breakfast" },
+  { key: "lunch", title: "Lunch / lunch box", short: "lunch" },
+  { key: "snack", title: "Evening snack", short: "snack" },
+  { key: "toddler", title: "Toddler egg idea (his 2 eggs)", short: "toddler's eggs", tab: "Toddler eggs", wide: true }
+];
+function slotTab(s) { return s.tab || s.title.split(" (")[0].replace(" / lunch box", ""); }
 
 var state = {};   // key -> current recipe
 var locked = {};  // key -> bool
 var prev = {};    // key -> last name, avoid immediate repeats
 
+// ---------- Ingredients and inventory ----------
+var CAT = {};
+CATALOG.forEach(function (c) { CAT[c[0]] = { label: c[1], group: c[2], alias: c[3] }; });
+Object.keys(RECIPES).forEach(function (slot) {
+  RECIPES[slot].forEach(function (r) { r.slot = slot; r.ing = RECIPE_ING[r.n] || []; });
+});
+function ingLabel(k) { return Array.isArray(k) ? k.map(ingLabel).join(" / ") : CAT[k].label; }
+function ingSearch(k) { return Array.isArray(k) ? k.map(ingSearch).join(" ") : CAT[k].label + " " + CAT[k].alias; }
+
+var STORE_KEY = "mealplanner.inventory.v1";
+var storageOk = true;
+var inv = loadInv();
+function loadInv() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      var o = JSON.parse(raw);
+      return { have: o.have || {}, frozen: Array.isArray(o.frozen) ? o.frozen : [] };
+    }
+  } catch (e) { storageOk = false; }
+  return { have: {}, frozen: [] };
+}
+function saveInv() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(inv)); } catch (e) { storageOk = false; }
+  document.getElementById("storageNote").hidden = storageOk;
+}
+function haveCount() { return Object.keys(inv.have).filter(function (k) { return inv.have[k]; }).length; }
+function has(k) { return Array.isArray(k) ? k.some(has) : !!inv.have[k]; }
+function frozenQty(r) { return inv.frozen.reduce(function (n, f) { return n + (f.recipe === r.n ? f.qty : 0); }, 0); }
+function matchInfo(r) {
+  var core = r.ing.filter(function (i) { return !i[2]; });
+  var missing = core.filter(function (i) { return !has(i[0]); });
+  return {
+    r: r, total: core.length, missing: missing,
+    pct: core.length ? (core.length - missing.length) / core.length : 0,
+    optHave: r.ing.filter(function (i) { return i[2] && has(i[0]); }).length,
+    frozen: frozenQty(r)
+  };
+}
+function onInvChanged() {
+  saveInv();
+  document.getElementById("pcIng").textContent = String(haveCount());
+  document.getElementById("pcFrz").textContent = String(inv.frozen.length);
+  SLOTS.forEach(function (s) { if (state[s.key]) renderSlot(s.key); });
+}
+function toast(msg, undoLabel, undo) {
+  var t = document.getElementById("toast");
+  t.innerHTML = "";
+  t.appendChild(el("span", { text: msg }));
+  if (undo) {
+    var b = el("button", { text: undoLabel || "Undo" });
+    b.addEventListener("click", function () { undo(); t.hidden = true; });
+    t.appendChild(b);
+  }
+  t.hidden = false;
+  clearTimeout(toast._t);
+  toast._t = setTimeout(function () { t.hidden = true; }, 5000);
+}
+
+// ---------- Roller ----------
 function pickRandom(n) {
   var a = new Uint32Array(1);
   (window.crypto || window.msCrypto).getRandomValues(a);
   return a[0] % n;
 }
 function filtered(key) {
+  var pantry = document.getElementById("fPantry").checked;
   var skipEgg = document.getElementById("fEgg").checked;
   var box = document.getElementById("fBox").checked;
   var frz = document.getElementById("fFreeze").checked;
   var trv = document.getElementById("fTravel").checked;
   return RECIPES[key].filter(function (r) {
+    if (pantry) { var m = matchInfo(r); if (m.missing.length && !m.frozen) return false; }
     if (skipEgg && r.egg && key !== "toddler") return false;
     if (box && (key === "lunch" || key === "breakfast") && !r.box) return false;
     if (frz && !r.frz) return false;
@@ -215,34 +602,412 @@ function renderSlot(key) {
   var body = box.querySelector(".body");
   body.innerHTML = "";
   if (!r) {
-    body.appendChild(el("div", { class: "name empty", text: "No recipes match the filters" }));
+    var pantryOn = document.getElementById("fPantry").checked;
+    var msg = pantryOn && !haveCount() && !inv.frozen.length ? "Add ingredients in Pantry first" : "No recipes match the filters";
+    body.appendChild(el("div", { class: "name empty", text: msg }));
     return;
   }
   body.appendChild(el("div", { class: "name", text: r.n }));
-  var chips = el("div", { class: "chips" }, [
+  appendDetails(body, r);
+}
+
+// Ingredient list with a tick for what is in the pantry. In lists it is shown open, on the roller card it is collapsible.
+function appendIngredients(parent, r, collapsible) {
+  var haveAny = haveCount() > 0;
+  var ul = el("ul");
+  r.ing.forEach(function (i) {
+    var inPantry = has(i[0]);
+    var cls = (i[2] ? "opt " : "") + (haveAny ? (inPantry ? "have" : "miss") : "");
+    var li = el("li", { class: cls.trim() });
+    li.appendChild(el("span", { class: "mark", text: haveAny ? (inPantry ? "✓" : "○") : "•" }));
+    var txt = el("span", {}, [document.createTextNode(ingLabel(i[0]) + " "), el("span", { class: "qty", text: "— " + i[1] + (i[2] ? " (optional)" : "") })]);
+    li.appendChild(txt);
+    ul.appendChild(li);
+  });
+  var title = "Ingredients (serves 3)";
+  if (collapsible) {
+    var d = el("details", { class: "ing-details" }, [el("summary", { text: title }), ul]);
+    parent.appendChild(d);
+  } else {
+    parent.appendChild(el("div", { class: "ing" }, [el("h4", { class: "ing-title", text: title }), ul]));
+  }
+}
+
+// Chips, ingredients, tip and links for one recipe. Shared by the rolled card and the lists.
+function appendDetails(parent, r, compact) {
+  // compact: the list row already shows kcal/protein/fibre, so only show the tags
+  var chips = el("div", { class: "chips" }, compact ? [] : [
     el("span", { class: "chip", text: "~" + r.k + " kcal" }),
     el("span", { class: "chip", text: r.p + " g protein" }),
     el("span", { class: "chip", text: r.f + " g fibre" })
   ]);
+  var fq = frozenQty(r);
+  if (fq) chips.appendChild(el("span", { class: "chip frz", text: "❄ " + fq + " in freezer" }));
   if (r.frz) chips.appendChild(el("span", { class: "chip", text: "freezer-friendly" }));
   if (r.box) chips.appendChild(el("span", { class: "chip", text: "box-friendly" }));
   if (r.trv) chips.appendChild(el("span", { class: "chip", text: "travels well" }));
   if (r.egg) chips.appendChild(el("span", { class: "chip", text: "egg" }));
-  body.appendChild(chips);
-  body.appendChild(el("p", { class: "tip", text: r.tip }));
+  if (chips.childNodes.length) parent.appendChild(chips);
+  parent.appendChild(el("p", { class: "tip", text: r.tip }));
+  appendIngredients(parent, r, !compact);
 
   var links = el("div", { class: "links" });
   r.v.forEach(function (v) {
-    var a = el("a", { class: "vid", href: v[1], target: "_blank", rel: "noopener noreferrer", text: v[0] });
-    links.appendChild(a);
+    links.appendChild(el("a", { class: "vid", href: v[1], target: "_blank", rel: "noopener noreferrer", text: v[0] }));
   });
   if (!r.v.length) {
     links.appendChild(el("a", { class: "vid", href: ytsearch(r.n), target: "_blank", rel: "noopener noreferrer", text: "Search YouTube" }));
   }
   links.appendChild(el("a", { class: "web", href: gsearch(r.n), target: "_blank", rel: "noopener noreferrer", text: "Written recipe (web search)" }));
-  body.appendChild(links);
+  parent.appendChild(links);
 }
 
+// ---------- Recipe list items (All and Cook screens) ----------
+function slotOf(r) { return SLOTS.filter(function (s) { return s.key === r.slot; })[0]; }
+function searchText(r) {
+  return (r.n + " " + r.tip + " " + (r.frz ? "freezer " : "") + (r.trv ? "travel " : "") + (r.box ? "box " : "") + " " +
+    r.ing.map(function (i) { return ingSearch(i[0]); }).join(" ")).toLowerCase();
+}
+function useRecipe(r) {
+  var s = slotOf(r);
+  locked[s.key] = false;
+  var lockBtn = document.querySelector("#slot-" + s.key + " .lock");
+  lockBtn.setAttribute("aria-pressed", "false");
+  lockBtn.textContent = "Lock";
+  setResult(s.key, r);
+  location.hash = "#roll";
+  showView("home");
+  var card = document.getElementById("slot-" + s.key);
+  var body = card.querySelector(".body");
+  body.classList.remove("land");
+  void body.offsetWidth;
+  body.classList.add("land");
+  card.scrollIntoView({ block: "center" });
+}
+function buildItem(r, info, onChange) {
+  var item = el("details", { class: "item", "data-text": searchText(r) });
+  var kids = [
+    el("span", { class: "n", text: r.n }),
+    el("span", { class: "meta", text: "~" + r.k + " kcal · " + r.p + " g protein · " + r.f + " g fibre" })
+  ];
+  if (info && info.frozen) kids.push(el("span", { class: "ready", text: "❄ " + info.frozen + " in freezer" }));
+  else if (info && !info.missing.length) kids.push(el("span", { class: "ready", text: "✓ You have everything" }));
+  else if (info && info.missing.length) kids.push(el("span", { class: "need", text: "Need: " + info.missing.map(function (m) { return ingLabel(m[0]); }).join(", ") }));
+  item.appendChild(el("summary", {}, kids));
+  var inner = el("div", { class: "inner" });
+  if (info && info.missing.length) {
+    var acts = el("div", { class: "need-actions" });
+    info.missing.forEach(function (m) {
+      (Array.isArray(m[0]) ? m[0] : [m[0]]).forEach(function (k) {
+        var b = el("button", { text: "I have " + CAT[k].label.split(" (")[0].toLowerCase() });
+        b.addEventListener("click", function () { inv.have[k] = true; onInvChanged(); if (onChange) onChange(); });
+        acts.appendChild(b);
+      });
+    });
+    inner.appendChild(acts);
+  }
+  appendDetails(inner, r, true);
+  var use = el("button", { class: "use", text: "Use this for " + slotOf(r).short });
+  use.addEventListener("click", function () { useRecipe(r); });
+  inner.appendChild(use);
+  item.appendChild(inner);
+  return item;
+}
+
+// ---------- All recipes ----------
+var allTab = "breakfast";
+function buildAll() {
+  var tabs = document.getElementById("allTabs");
+  var list = document.getElementById("allList");
+  tabs.innerHTML = "";
+  list.innerHTML = "";
+  SLOTS.forEach(function (s) {
+    var tab = el("button", { class: "tab", role: "tab", "data-slot": s.key }, [
+      document.createTextNode(slotTab(s)),
+      el("span", { class: "count", text: String(RECIPES[s.key].length) })
+    ]);
+    tab.addEventListener("click", function () {
+      allTab = s.key;
+      document.getElementById("allSearch").value = "";
+      applyAll();
+      window.scrollTo(0, 0);
+    });
+    tabs.appendChild(tab);
+    var cat = el("section", { class: "cat", "data-slot": s.key });
+    cat.appendChild(el("h2", { class: "all-head", text: slotTab(s) }));
+    RECIPES[s.key].forEach(function (r) { cat.appendChild(buildItem(r, null)); });
+    list.appendChild(cat);
+  });
+  applyAll();
+}
+function applyAll() {
+  var q = document.getElementById("allSearch").value.trim().toLowerCase();
+  var anyShown = false;
+  document.getElementById("allTabs").classList.toggle("searching", !!q);
+  document.querySelectorAll("#allTabs .tab").forEach(function (b) {
+    b.setAttribute("aria-selected", !q && b.getAttribute("data-slot") === allTab ? "true" : "false");
+  });
+  document.querySelectorAll("#allList .cat").forEach(function (cat) {
+    var inTab = !q && cat.getAttribute("data-slot") === allTab;
+    var matches = 0;
+    cat.querySelectorAll(".item").forEach(function (it) {
+      var ok = q ? it.getAttribute("data-text").indexOf(q) !== -1 : inTab;
+      it.hidden = !ok;
+      if (ok) matches++;
+    });
+    cat.hidden = matches === 0;
+    cat.querySelector(".all-head").hidden = !q;   // tabs act as the title when not searching
+    if (matches) anyShown = true;
+  });
+  document.getElementById("allEmpty").hidden = anyShown;
+}
+
+// ---------- Cook: "what can I make with what I have" ----------
+var cookTab = "all";
+function matches(q) {
+  q = q.trim().toLowerCase();
+  if (!q) return [];
+  return CATALOG.filter(function (c) {
+    return !inv.have[c[0]] && (c[1] + " " + c[3]).toLowerCase().indexOf(q) !== -1;
+  }).slice(0, 8);
+}
+function splitTyped(v) { return v.split(/[,;\n]+/).map(function (t) { return t.trim(); }).filter(Boolean); }
+// Adds every ingredient in a typed or pasted list like "paneer, rava, curd". Words that match nothing stay in the box.
+function addTyped() {
+  var input = document.getElementById("cookAdd");
+  var tokens = splitTyped(input.value);
+  if (!tokens.length) return;
+  var added = [], already = [], unknown = [];
+  function find(q) {
+    q = q.toLowerCase();
+    // exact: the whole label, a part of it ("Brinjal / eggplant", "Bottle gourd (lauki)") or one of its aliases
+    var exact = CATALOG.filter(function (c) {
+      var parts = c[1].toLowerCase().split(/\s*[\/()]\s*/).filter(Boolean);
+      return parts.indexOf(q) !== -1 || c[3].toLowerCase().split(" ").indexOf(q) !== -1;
+    })[0];
+    return exact || CATALOG.filter(function (c) { return (c[1] + " " + c[3]).toLowerCase().indexOf(q) !== -1; })[0];
+  }
+  function take(found) {
+    if (inv.have[found[0]]) { if (already.indexOf(found[1]) === -1) already.push(found[1]); return; }
+    inv.have[found[0]] = true;
+    added.push(found[1]);
+  }
+  tokens.forEach(function (t) {
+    var found = find(t);
+    if (found) { take(found); return; }
+    // "tomato carrot" with no comma: try each word on its own
+    var words = t.split(/\s+/);
+    if (words.length < 2) { unknown.push(t); return; }
+    words.forEach(function (w) { var f = find(w); if (f) take(f); else unknown.push(w); });
+  });
+  input.value = unknown.join(", ");
+  onInvChanged();
+  renderCook();
+  var msg = (added.length ? "Added " + added.join(", ") : "Nothing new added") +
+    (already.length ? ". Already had " + already.join(", ") : "") +
+    (unknown.length ? ". Couldn't find " + unknown.join(", ") : "");
+  toast(msg);
+}
+function buildCookTabs() {
+  var tabs = document.getElementById("cookTabs");
+  tabs.innerHTML = "";
+  [{ key: "all", label: "All" }].concat(SLOTS.map(function (s) { return { key: s.key, label: slotTab(s) }; })).forEach(function (t) {
+    var b = el("button", { class: "tab", role: "tab", "data-slot": t.key, text: t.label });
+    b.addEventListener("click", function () { cookTab = t.key; renderCook(); });
+    tabs.appendChild(b);
+  });
+}
+function renderCook() {
+  document.querySelectorAll("#cookTabs .tab").forEach(function (b) {
+    b.setAttribute("aria-selected", b.getAttribute("data-slot") === cookTab ? "true" : "false");
+  });
+  // suggestions for what is typed
+  var input = document.getElementById("cookAdd");
+  var sugg = document.getElementById("cookSuggest");
+  sugg.innerHTML = "";
+  var typed = splitTyped(input.value);
+  var last = input.value.trim() && !/[,;\n]\s*$/.test(input.value) ? typed[typed.length - 1] : "";   // the word being typed
+  matches(last || "").forEach(function (c) {
+    var b = el("button", { class: "sugg", text: c[1] });
+    b.addEventListener("click", function () {
+      inv.have[c[0]] = true;
+      typed.pop();                                  // drop the word just completed, keep earlier ones waiting for "Add"
+      input.value = typed.length ? typed.join(", ") + ", " : "";
+      onInvChanged(); renderCook(); input.focus();
+    });
+    sugg.appendChild(b);
+  });
+  if (last && !sugg.childNodes.length) sugg.appendChild(el("span", { class: "hint", text: "No new ingredient matches \"" + last + "\"." }));
+  // what I have
+  var have = document.getElementById("cookHave");
+  have.innerHTML = "";
+  CATALOG.filter(function (c) { return inv.have[c[0]]; }).forEach(function (c) {
+    var b = el("button", { class: "have-chip", "aria-label": "Remove " + c[1], text: c[1] });
+    b.addEventListener("click", function () { delete inv.have[c[0]]; onInvChanged(); renderCook(); });
+    have.appendChild(b);
+  });
+  document.getElementById("cookHaveSummary").textContent = "My ingredients (" + haveCount() + ")";
+
+  var out = document.getElementById("cookResults");
+  out.innerHTML = "";
+  if (!haveCount() && !inv.frozen.length) {
+    var es = el("div", { class: "empty-state" }, [el("p", { text: "Tell me what you have and I'll show what you can cook." })]);
+    var usual = el("button", { class: "primary", text: "Add my usual groceries" });
+    usual.addEventListener("click", function () { addUsual(); renderCook(); });
+    es.appendChild(usual);
+    out.appendChild(es);
+    return;
+  }
+  var pool = [];
+  SLOTS.forEach(function (s) { if (cookTab === "all" || cookTab === s.key) RECIPES[s.key].forEach(function (r) { pool.push(matchInfo(r)); }); });
+  var freezer = pool.filter(function (m) { return m.frozen > 0; });
+  var rest = pool.filter(function (m) { return !m.frozen; });
+  var ready = rest.filter(function (m) { return m.missing.length === 0; });
+  var almost = rest.filter(function (m) { return m.missing.length >= 1 && m.missing.length <= 2; });
+  var more = rest.filter(function (m) { return m.missing.length > 2; });
+  var byBest = function (a, b) { return b.pct - a.pct || b.optHave - a.optHave; };
+  ready.sort(byBest); almost.sort(byBest); more.sort(byBest);
+  freezer.sort(function (a, b) { return b.frozen - a.frozen; });
+
+  function section(title, list, open, limit) {
+    if (!list.length) return;
+    out.appendChild(el("div", { class: "sec-title" }, [el("span", { text: title }), el("span", { class: "sub-count", text: String(list.length) })]));
+    list.slice(0, limit || list.length).forEach(function (m) { out.appendChild(buildItem(m.r, m, renderCook)); });
+    if (limit && list.length > limit) {
+      var more = el("button", { class: "show-more", text: "Show " + (list.length - limit) + " more" });
+      more.addEventListener("click", function () {
+        list.slice(limit).forEach(function (m) { out.insertBefore(buildItem(m.r, m, renderCook), more); });
+        more.remove();
+      });
+      out.appendChild(more);
+    }
+  }
+  section("From your freezer", freezer, true);
+  section("Ready to cook", ready, true);
+  section("Missing 1-2 things", almost, true);
+  section("More ideas (missing more)", more, false, 8);
+  if (!freezer.length && !ready.length && !almost.length && !more.length) {
+    out.appendChild(el("p", { class: "empty-state", text: "No recipes in this category." }));
+  }
+}
+
+// ---------- Pantry ----------
+var pantryTab = "ing";
+function addUsual() {
+  USUAL.forEach(function (k) { inv.have[k] = true; });
+  onInvChanged();
+}
+function renderPantryIng() {
+  var q = document.getElementById("pSearch").value.trim().toLowerCase();
+  var wrap = document.getElementById("pGroups");
+  wrap.innerHTML = "";
+  GROUPS.forEach(function (g) {
+    var items = CATALOG.filter(function (c) { return c[2] === g && (!q || (c[1] + " " + c[3]).toLowerCase().indexOf(q) !== -1); });
+    if (!items.length) return;
+    wrap.appendChild(el("h2", { class: "all-head", text: g }));
+    var row = el("div", { class: "chips-row" });
+    items.forEach(function (c) {
+      var b = el("button", { class: "ing-chip", "aria-pressed": inv.have[c[0]] ? "true" : "false", text: c[1] });
+      b.addEventListener("click", function () {
+        if (inv.have[c[0]]) delete inv.have[c[0]]; else inv.have[c[0]] = true;
+        b.setAttribute("aria-pressed", inv.have[c[0]] ? "true" : "false");
+        onInvChanged();
+      });
+      row.appendChild(b);
+    });
+    wrap.appendChild(row);
+  });
+  if (!wrap.childNodes.length) wrap.appendChild(el("p", { class: "empty-state", text: "No ingredient matches that." }));
+}
+function todayStr() {
+  var d = new Date(), p = function (n) { return (n < 10 ? "0" : "") + n; };
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+function ageDays(dateStr) {
+  var t = new Date(dateStr + "T00:00:00").getTime();
+  return isNaN(t) ? 0 : Math.max(0, Math.floor((Date.now() - t) / 86400000));
+}
+function buildFreezerSelect() {
+  var sel = document.getElementById("fzRecipe");
+  sel.innerHTML = "";
+  var g1 = el("optgroup", { label: "Freezer-friendly recipes" });
+  SLOTS.forEach(function (s) {
+    RECIPES[s.key].filter(function (r) { return r.frz; }).forEach(function (r) { g1.appendChild(el("option", { value: "r:" + r.n, text: r.n })); });
+  });
+  var g2 = el("optgroup", { label: "Basics" });
+  ["Chapatis", "Ragi-wheat chapatis", "Methi chapatis"].forEach(function (n) { g2.appendChild(el("option", { value: "c:" + n, text: n })); });
+  g2.appendChild(el("option", { value: "other", text: "Other (type a name)" }));
+  sel.appendChild(g1);
+  sel.appendChild(g2);
+  document.getElementById("fzName").hidden = true;
+}
+function renderFreezer() {
+  var list = document.getElementById("fzList");
+  list.innerHTML = "";
+  if (!inv.frozen.length) {
+    list.appendChild(el("p", { class: "empty-state", text: "Nothing in the freezer yet. Add what you've frozen above." }));
+    return;
+  }
+  inv.frozen.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; }).forEach(function (f) {
+    var age = ageDays(f.date);
+    var ageCls = age >= 30 ? "age old" : age >= 21 ? "age warn" : "age";
+    var ageTxt = (age === 0 ? "frozen today" : "frozen " + age + " day" + (age === 1 ? "" : "s") + " ago") + (age >= 30 ? " · use soon" : "");
+    var minus = el("button", { "aria-label": "One less " + f.name, text: "−" });
+    var plus = el("button", { "aria-label": "One more " + f.name, text: "+" });
+    var q = el("span", { class: "q", text: String(f.qty) });
+    minus.addEventListener("click", function () {
+      if (f.qty > 1) { f.qty--; onInvChanged(); renderFreezer(); return; }
+      var idx = inv.frozen.indexOf(f);
+      inv.frozen.splice(idx, 1);
+      onInvChanged(); renderFreezer();
+      toast("Finished " + f.name, "Undo", function () { f.qty = 1; inv.frozen.splice(idx, 0, f); onInvChanged(); renderFreezer(); });
+    });
+    plus.addEventListener("click", function () { f.qty++; onInvChanged(); renderFreezer(); });
+    var del = el("button", { class: "fz-del", "aria-label": "Remove " + f.name, text: "Remove" });
+    del.addEventListener("click", function () {
+      var idx = inv.frozen.indexOf(f);
+      inv.frozen.splice(idx, 1);
+      onInvChanged(); renderFreezer();
+      toast("Removed " + f.name, "Undo", function () { inv.frozen.splice(idx, 0, f); onInvChanged(); renderFreezer(); });
+    });
+    var info = el("div", {}, [el("div", { class: "nm", text: f.name }), el("div", { class: ageCls, text: ageTxt })]);
+    list.appendChild(el("div", { class: "fz-card" }, [info, el("div", { class: "stepper" }, [minus, q, plus]), del]));
+  });
+}
+function renderPantry() {
+  document.querySelectorAll("#pantryTabs .tab").forEach(function (b) {
+    b.setAttribute("aria-selected", b.getAttribute("data-pt") === pantryTab ? "true" : "false");
+  });
+  document.getElementById("pIng").hidden = pantryTab !== "ing";
+  document.getElementById("pFrz").hidden = pantryTab !== "frz";
+  document.getElementById("storageNote").hidden = storageOk;
+  document.getElementById("pcIng").textContent = String(haveCount());
+  document.getElementById("pcFrz").textContent = String(inv.frozen.length);
+  renderPantryIng();
+  renderFreezer();
+}
+
+// ---------- Screens (hash routing so the phone back gesture works) ----------
+var HASH_VIEW = { "": "home", "#roll": "home", "#cook": "cook", "#pantry": "pantry", "#all": "all" };
+var VIEW_HASH = { home: "roll", cook: "cook", pantry: "pantry", all: "all" };
+var currentView = null, scrollPos = {};
+function showView(name) {
+  if (!VIEW_HASH[name]) name = "home";
+  if (name === currentView) return;
+  if (currentView) scrollPos[currentView] = window.pageYOffset;
+  Object.keys(VIEW_HASH).forEach(function (v) { document.getElementById(v).hidden = v !== name; });
+  currentView = name;
+  document.querySelectorAll("#nav button").forEach(function (b) {
+    if (b.getAttribute("data-go") === VIEW_HASH[name]) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+  });
+  if (name === "cook") renderCook();
+  if (name === "pantry") renderPantry();
+  if (name === "all") buildAll();
+  window.scrollTo(0, name === "home" ? (scrollPos.home || 0) : 0);
+}
+window.addEventListener("hashchange", function () { showView(HASH_VIEW[location.hash] || "home"); });
+
+// ---------- Rolling ----------
 function roll(key, animate) {
   if (locked[key]) return;
   var box = document.getElementById("slot-" + key);
@@ -327,10 +1092,11 @@ function build() {
   });
 }
 
+// ---------- Wiring ----------
 document.getElementById("rollAll").addEventListener("click", function () {
   SLOTS.forEach(function (s, i) { setTimeout(function () { roll(s.key, true); }, i * 180); });
 });
-["fEgg", "fBox", "fFreeze", "fTravel"].forEach(function (id) {
+["fPantry", "fEgg", "fBox", "fFreeze", "fTravel"].forEach(function (id) {
   document.getElementById(id).addEventListener("change", function () {
     SLOTS.forEach(function (s) { if (!locked[s.key]) roll(s.key, false); });
   });
@@ -341,9 +1107,88 @@ document.getElementById("theme").addEventListener("click", function () {
   var cur = root.getAttribute("data-theme") || (dark ? "dark" : "light");
   root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
 });
+document.querySelectorAll("#nav button").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var go = b.getAttribute("data-go");
+    if (location.hash === "#" + go || (go === "roll" && !location.hash)) showView(HASH_VIEW["#" + go]);
+    else location.hash = "#" + go;
+  });
+});
+document.getElementById("allSearch").addEventListener("input", applyAll);
+
+document.getElementById("cookAdd").addEventListener("input", renderCook);
+document.getElementById("cookAdd").addEventListener("keydown", function (e) { if (e.key === "Enter") addTyped(); });
+document.getElementById("cookAddBtn").addEventListener("click", addTyped);
+
+document.querySelectorAll("#pantryTabs .tab").forEach(function (b) {
+  b.addEventListener("click", function () { pantryTab = b.getAttribute("data-pt"); renderPantry(); window.scrollTo(0, 0); });
+});
+document.getElementById("pSearch").addEventListener("input", renderPantryIng);
+document.getElementById("pUsual").addEventListener("click", function () { addUsual(); renderPantryIng(); toast("Added your usual groceries"); });
+document.getElementById("pClear").addEventListener("click", function () {
+  var before = JSON.parse(JSON.stringify(inv.have));
+  if (!haveCount()) return;
+  inv.have = {};
+  onInvChanged(); renderPantryIng();
+  toast("Cleared your ingredients", "Undo", function () { inv.have = before; onInvChanged(); renderPantryIng(); });
+});
+document.getElementById("stapleList").textContent = STAPLES;
+
+document.getElementById("fzRecipe").addEventListener("change", function () {
+  document.getElementById("fzName").hidden = this.value !== "other";
+});
+document.getElementById("fzAdd").addEventListener("click", function () {
+  var val = document.getElementById("fzRecipe").value;
+  var qty = parseInt(document.getElementById("fzQty").value, 10);
+  var date = document.getElementById("fzDate").value || todayStr();
+  var name = "", recipe = "";
+  if (val.indexOf("r:") === 0) { recipe = val.slice(2); name = recipe; }
+  else if (val.indexOf("c:") === 0) { name = val.slice(2); }
+  else { name = document.getElementById("fzName").value.trim(); }
+  if (!name) { toast("Type a name for what you froze"); return; }
+  if (!(qty >= 1)) { toast("Enter how many (1 or more)"); return; }
+  inv.frozen.push({ id: Date.now() + "-" + Math.floor(Math.random() * 1000), name: name, recipe: recipe, qty: qty, date: date });
+  onInvChanged(); renderFreezer();
+  toast("Added " + qty + " × " + name);
+});
+
+document.getElementById("invExport").addEventListener("click", function () {
+  var blob = new Blob([JSON.stringify(inv, null, 2)], { type: "application/json" });
+  var a = el("a", { href: URL.createObjectURL(blob), download: "meal-planner-inventory-" + todayStr() + ".json" });
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+});
+document.getElementById("invImport").addEventListener("click", function () { document.getElementById("invFile").click(); });
+document.getElementById("invFile").addEventListener("change", function () {
+  var file = this.files && this.files[0];
+  this.value = "";
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function () {
+    try {
+      var o = JSON.parse(reader.result);
+      var have = {};
+      Object.keys(o.have || {}).forEach(function (k) { if (CAT[k] && o.have[k]) have[k] = true; });
+      var frozen = (Array.isArray(o.frozen) ? o.frozen : []).filter(function (f) {
+        return f && typeof f.name === "string" && f.qty >= 1 && typeof f.date === "string";
+      }).map(function (f) { return { id: String(f.id || Date.now()), name: f.name, recipe: typeof f.recipe === "string" ? f.recipe : "", qty: Math.floor(f.qty), date: f.date }; });
+      if (!window.confirm("Replace your current pantry and freezer with this file? (" + Object.keys(have).length + " ingredients, " + frozen.length + " frozen items)")) return;
+      inv = { have: have, frozen: frozen };
+      onInvChanged(); renderPantry();
+      toast("Imported your pantry");
+    } catch (e) { toast("That file isn't a valid pantry backup"); }
+  };
+  reader.readAsText(file);
+});
 
 build();
+buildFreezerSelect();
+buildCookTabs();
+document.getElementById("fzDate").value = todayStr();
+document.getElementById("pcIng").textContent = String(haveCount());
+document.getElementById("pcFrz").textContent = String(inv.frozen.length);
 SLOTS.forEach(function (s) { roll(s.key, false); });
+showView(HASH_VIEW[location.hash] || "home");
 </script>
 </body>
 </html>

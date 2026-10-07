@@ -50,6 +50,8 @@ Equipment: stove, microwave, air fryer. Cook strengths: stuffed parathas, pulao,
 | B9 | **Protein smoothie**. 1 glass milk + ½ banana + 1 tbsp soaked chia + 1 scoop Cosmix. | ~280 kcal, 28 g protein, 6 g fibre | Skip the scoop for the toddler (milk + banana + chia only). |
 | B10 | **Chia-curd or milk pudding bowl**. 1 tbsp chia soaked overnight in milk, topped with seeds, nuts and fruit. | ~220 kcal, 10 g protein, 8 g fibre | Make-ahead, weekday friendly. |
 | B11 | **Air-fried falafel wrap (3 falafel)**. Soaked (not canned) chickpeas, onion, garlic, coriander, jeera and a little besan, shaped and air-fried at 180 °C for 12-15 minutes. Wrap in a whole-wheat chapati with cucumber, tomato, lettuce or cabbage and a curd-garlic (or light hummus) sauce. | ~380 kcal, 15 g protein, 8 g fibre | Freezer-friendly. Use dry soaked chickpeas, because canned ones are salty. Skip the fried version and shop-bought tahini sauce. Toddler: mild falafel, mashed into a soft wrap. |
+| B12 | **Paneer bhurji with roti or toast**. 150-200 g crumbled paneer cooked with onion, tomato, capsicum, turmeric and pepper, served with a chapati or ragi roti, or sourdough toast. | ~330 kcal, 18 g protein, 4 g fibre | Box-friendly. Also a good tortilla filling. Light on oil and salt. |
+| B13 | **Egg kathi roll (chapati egg roll)**. A thin beaten-egg layer cooked on a whole-wheat chapati or tortilla, filled with onion, capsicum, mint-curd sauce and lemon, rolled in foil. | ~340 kcal, 16 g protein, 4 g fibre | Box-friendly. Use a plain chapati, not a fried layered paratha. Freeze wrapped in foil and reheat in the air fryer. |
 
 ## LUNCH AND LUNCH BOX (12)
 
@@ -71,6 +73,7 @@ Equipment: stove, microwave, air fryer. Cook strengths: stuffed parathas, pulao,
 | L14 | **Air-fried lauki kofta (3-4) in light tomato gravy + 2 chapatis**. Grate lauki and squeeze out the water, mix with besan, onion and coriander, shape and air-fry at 180 °C for 12-15 minutes. Add to the gravy just before serving. *(Replaces soya paratha, which is not liked.)* | ~380 kcal, 13 g protein, 8 g fibre | Koftas freeze well. Keep the gravy low on oil and salt. Save the squeezed lauki water for the dal or atta. |
 | L15 | **Freezer burrito: egg + rajma/chana + veg**. Whole-wheat tortilla filled with egg bhurji, cooked rajma or chana, capsicum, onion, a little paneer, coriander and a curd-garlic sauce. Wrap, freeze, microwave 2 minutes and crisp in the air fryer. | ~420 kcal, 20 g protein, 9 g fibre | Freezer-friendly and box-friendly. Skip cheese and bottled sauces. Check the tortilla label for sodium. |
 | L16 | **Paneer tikka wrap**. Air-fried paneer tikka (S3) with onion, capsicum, cucumber and mint-curd sauce in a whole-wheat tortilla or chapati. | ~360 kcal, 20 g protein, 5 g fibre | Box-friendly. Make the tikka ahead and assemble fresh. |
+| L17 | **Palak paneer + 2 chapatis**. Blanched spinach blended with green chilli and ginger, cooked with onion-tomato, paneer added at the end. No cream: a spoon of curd or milk is enough. | ~400 kcal, 20 g protein, 8 g fibre | Box-friendly. Air-fry the paneer cubes first for less oil. Keep the salt low. Toddler: mild version. |
 
 ## EVENING SNACKS (10)
 
@@ -167,6 +170,80 @@ Good in a bag or office drawer for several hours:
 - **OK in a box**: S4 boiled egg + roasted chana (egg within 3-4 hours or keep it cool).
 - **Best eaten fresh**: S2 sprouts chaat (goes soggy), S3 paneer tikka, S5 pepper fry, S9 corn cup and S11 tortilla pizza.
 - **Almonds and the like**: 8-10 almonds is about 70-80 kcal, so measure it out. Use a small pinch of salt or none, since it adds to the daily salt limit. Whole nuts and seeds are a **choking risk for the toddler** (under 4), so give him only powdered or very finely chopped versions.
+
+<!-- ingredients:start -->
+## Ingredients by recipe (serves 3: 2 adults + toddler)
+
+Quantities are home-style estimates, not copied from the videos. *(optional)* items are for serving or flavour. Not listed, assumed always in the kitchen: salt, oil, ghee, butter, turmeric, red chilli powder, coriander powder, jeera, mustard seeds, pepper, garam masala, amchur, hing, whole spices and baking soda.
+
+### Breakfast
+
+| Recipe | Ingredients |
+|---|---|
+| Besan-veg chilla with curd | Besan (gram flour) (¾ cup), Onion (1), Carrot (1), Coriander leaves (2 tbsp), Curd (1½ cups), Spinach (1 handful) *(optional)*, Green chilli (1) *(optional)*, Isabgol (psyllium husk) (½ tsp) *(optional)* |
+| Paneer-stuffed moong dal chilla | Moong dal (split) (¾ cup, soaked), Paneer (100 g), Ginger (1 inch), Green chilli (1), Onion (½) *(optional)*, Coriander leaves (2 tbsp) *(optional)* |
+| Ragi dosa | Ragi flour (1 cup), Curd (½ cup), Onion (1 small), Coriander leaves (2 tbsp), Green chilli (1) *(optional)*, Curry leaves (few) *(optional)*, Tomato (2, for chutney) *(optional)*, Garlic (2 cloves, for chutney) *(optional)* |
+| Egg dosa (2) with sambar and chutney | Dosa batter (ready-made) (1½ cups), Eggs (2), Coriander leaves (1 tbsp) *(optional)*, Toor dal (½ cup, for sambar) *(optional)*, Tomato (1, for sambar) *(optional)*, Carrot (1, for sambar) *(optional)*, French beans (6, for sambar) *(optional)*, Tamarind (small lump, for sambar) *(optional)*, Sambar powder (1½ tsp, for sambar) *(optional)*, Mint (1 handful, for chutney) *(optional)* |
+| Paneer bhurji dosa (2) with sambar | Dosa batter (ready-made) (1½ cups), Paneer (100 g), Onion (1), Tomato (1), Capsicum (½), Coriander leaves (2 tbsp) *(optional)*, Toor dal (½ cup, for sambar) *(optional)*, Carrot (1, for sambar) *(optional)*, French beans (6, for sambar) *(optional)*, Tamarind (small lump, for sambar) *(optional)*, Sambar powder (1½ tsp, for sambar) *(optional)* |
+| Veg rava idli (3) with sambar | Rava / sooji (1½ cups), Curd (1 cup), Carrot (1), Peas (frozen) (¼ cup), French beans (6), Curry leaves (few), Ginger (1 inch), Green chilli (1), Coriander leaves (2 tbsp) *(optional)*, Toor dal (½ cup, for sambar) *(optional)*, Sambar powder (1½ tsp, for sambar) *(optional)*, Tamarind (small lump, for sambar) *(optional)* |
+| Veg masala omelette wrap | Eggs (4), Whole-wheat flour (atta) / Whole-wheat tortillas (2-3 chapatis or tortillas), Capsicum (½), Tomato (1), Onion (1), Coriander leaves (2 tbsp) *(optional)* |
+| Egg bhurji with mushroom and capsicum | Eggs (4), Mushroom (100 g), Capsicum (½), Onion (1), Tomato (1), Coriander leaves (2 tbsp) *(optional)*, Sourdough bread / Ragi flour / Whole-wheat flour (atta) (toast or roti, to serve) *(optional)* |
+| Protein smoothie with chia | Milk (2 glasses), Banana (1), Chia seeds (2 tbsp), Protein powder (Cosmix) (2 scoops (adults only)) |
+| Chia milk pudding bowl | Milk (1½ cups), Chia seeds (4 tbsp), Almonds (a few, to top) *(optional)*, Pumpkin seeds (1 tbsp, to top) *(optional)*, Banana (1, to top) *(optional)* |
+| Paneer bhurji with roti or toast | Paneer (200 g), Onion (1), Tomato (1), Capsicum (½), Green chilli (1), Coriander leaves (2 tbsp) *(optional)*, Whole-wheat flour (atta) / Ragi flour / Sourdough bread / Whole-wheat tortillas (chapati, roti, toast or tortilla, to serve) *(optional)* |
+| Egg kathi roll (chapati egg roll) | Eggs (4), Whole-wheat flour (atta) / Whole-wheat tortillas (3 chapatis or tortillas), Onion (1), Capsicum (½), Curd (½ cup, for sauce) *(optional)*, Mint (1 handful, for sauce) *(optional)*, Lemon (1) *(optional)*, Green chilli (1) *(optional)* |
+| Air-fried falafel wrap (3 falafel) | Chickpeas (dry, kabuli chana) (1 cup, soaked overnight), Onion (1), Garlic (4 cloves), Coriander leaves (1 bunch), Besan (gram flour) (2 tbsp), Whole-wheat tortillas / Whole-wheat flour (atta) (3 tortillas or chapatis), Cucumber (1) *(optional)*, Tomato (1) *(optional)*, Cabbage (1 cup shredded) *(optional)*, Curd (½ cup, for sauce) *(optional)* |
+
+### Lunch and lunch box
+
+| Recipe | Ingredients |
+|---|---|
+| Soya-veg pulao (millet or brown rice) | Brown rice / Millet (foxtail / little) / Rice (white) (1½ cups), Soya chunks / granules (¾ cup), Onion (1), Carrot (1), French beans (6), Peas (frozen) (½ cup), Tomato (1), Ginger (1 inch), Garlic (4 cloves), Mint (1 handful) *(optional)*, Curd (1 cup, for raita) *(optional)*, Cucumber (1, for raita) *(optional)* |
+| Paneer-mushroom-capsicum pulao | Brown rice / Millet (foxtail / little) / Rice (white) (1½ cups), Paneer (150 g), Mushroom (100 g), Capsicum (1), Onion (1), Ginger (1 inch), Garlic (4 cloves), Peas (frozen) (½ cup) *(optional)* |
+| Egg fried rice with vegetables | Brown rice / Millet (foxtail / little) / Rice (white) (2 cups cooked, cooled), Eggs (3), Cabbage (1 cup), Carrot (1), French beans (6), Garlic (3 cloves), Spring onion (2) *(optional)*, Soy sauce (½ tsp) *(optional)* |
+| Chana masala with 2 chapatis and salad | Chickpeas (dry, kabuli chana) (1 cup, soaked and cooked), Onion (2), Tomato (3), Ginger (1 inch), Garlic (4 cloves), Whole-wheat flour (atta) (1½ cups), Cucumber (1, for salad) *(optional)*, Lemon (1) *(optional)* |
+| Rajma bowl with brown rice and salad | Rajma (1 cup, soaked and cooked), Onion (2), Tomato (3), Ginger (1 inch), Garlic (4 cloves), Brown rice / Rice (white) / Millet (foxtail / little) (1½ cups), Cucumber (1, for salad) *(optional)*, Coriander leaves (2 tbsp) *(optional)* |
+| Dal with beans-carrot poriyal and 2 chapatis | Toor dal / Moong dal (split) (1 cup), Tomato (1), Onion (1), Garlic (3 cloves), French beans (200 g), Carrot (2), Whole-wheat flour (atta) (1½ cups), Curry leaves (few) *(optional)* |
+| Mushroom-paneer masala with 2 chapatis | Mushroom (200 g), Paneer (150 g), Onion (2), Tomato (3), Ginger (1 inch), Garlic (4 cloves), Whole-wheat flour (atta) (1½ cups), Coriander leaves (2 tbsp) *(optional)* |
+| Brinjal bharta with ragi or jowar roti | Brinjal / eggplant / Thin brinjal (2 large or 6 thin), Onion (2), Tomato (2), Garlic (4 cloves), Green chilli (1), Ragi flour / Jowar flour / Whole-wheat flour (atta) (1½ cups flour, for roti), Coriander leaves (2 tbsp) *(optional)* |
+| Paneer-cauliflower (gobi) stuffed paratha | Whole-wheat flour (atta) (2 cups), Cauliflower (1 cup, grated), Paneer (100 g), Green chilli (1), Ginger (1 inch), Coriander leaves (2 tbsp), Curd (1 cup, to serve) *(optional)* |
+| Air-fried lauki kofta in light gravy + 2 chapatis | Bottle gourd (lauki) (1 small, grated), Besan (gram flour) (½ cup), Onion (2), Tomato (3), Ginger (1 inch), Garlic (4 cloves), Whole-wheat flour (atta) (1½ cups), Coriander leaves (2 tbsp) *(optional)* |
+| Mixed-veg sambar with millet rice | Toor dal (¾ cup), Tomato (2), Onion (1), Carrot (1), French beans (6), Thin brinjal (3) *(optional)*, Drumstick (1) *(optional)*, Tamarind (small lump), Sambar powder (2 tsp), Millet (foxtail / little) / Brown rice / Rice (white) (1½ cups), Curry leaves (few) *(optional)* |
+| Egg curry with chapatis and beetroot-carrot salad | Eggs (6), Onion (2), Tomato (3), Ginger (1 inch), Garlic (4 cloves), Whole-wheat flour (atta) (1½ cups), Beetroot (1, for salad) *(optional)*, Carrot (1, for salad) *(optional)*, Coriander leaves (2 tbsp) *(optional)* |
+| Veg curd rice with sprouts salad | Rice (white) / Millet (foxtail / little) / Brown rice (1½ cups cooked), Curd (2 cups), Carrot (1), Cucumber (1), Curry leaves (few), Green chilli (1), Ginger (1 inch), Coriander leaves (2 tbsp) *(optional)*, Pomegranate (¼ cup) *(optional)*, Moong sprouts (1 cup, for salad) *(optional)* |
+| Freezer burrito: egg + rajma + veg | Whole-wheat tortillas (3), Eggs (4), Rajma / Chickpeas (dry, kabuli chana) (¾ cup cooked), Capsicum (1), Onion (1), Paneer (50 g) *(optional)*, Coriander leaves (2 tbsp) *(optional)*, Curd (½ cup, for garlic sauce) *(optional)* |
+| Paneer tikka wrap | Paneer (200 g), Curd (½ cup), Capsicum (1), Onion (1), Cucumber (1), Whole-wheat tortillas / Whole-wheat flour (atta) (3 tortillas or chapatis), Ginger (1 inch), Garlic (3 cloves), Besan (gram flour) (1 tbsp) *(optional)*, Mint (1 handful, for sauce) *(optional)* |
+| Palak paneer with 2 chapatis | Spinach (2 bunches (about 400 g)), Paneer (150 g), Onion (1), Tomato (2), Garlic (4 cloves), Ginger (1 inch), Green chilli (1), Whole-wheat flour (atta) (1½ cups), Curd (2 tbsp, for creaminess) *(optional)* |
+| Broccoli-corn-paneer stuffed paratha with raita | Whole-wheat flour (atta) (2 cups), Broccoli (1 cup, chopped fine), Sweet corn (frozen) (½ cup), Paneer (100 g), Green chilli (1), Coriander leaves (2 tbsp), Curd (1 cup, for raita) *(optional)*, Cucumber (1, for raita) *(optional)* |
+
+### Evening snacks
+
+| Recipe | Ingredients |
+|---|---|
+| Roasted makhana | Makhana (fox nuts) (3 cups) |
+| Sprouts chaat | Moong sprouts (2 cups), Onion (½), Tomato (1), Lemon (1), Coriander leaves (2 tbsp), Cucumber (½) *(optional)*, Green chilli (1) *(optional)* |
+| Air-fried paneer tikka | Paneer (200 g), Curd (½ cup), Capsicum (1), Onion (1), Ginger (1 inch), Garlic (3 cloves), Besan (gram flour) (1 tbsp) *(optional)* |
+| Boiled egg + roasted chana plate | Eggs (3), Roasted chana (1 cup) |
+| Baby corn and mushroom pepper fry | Baby corn (150 g), Mushroom (150 g), Onion (1), Garlic (3 cloves), Green chilli (1), Capsicum (½) *(optional)*, Curry leaves (few) *(optional)* |
+| Air-fried veg-dal cutlets | Moong dal (split) (¾ cup, soaked), Beetroot (1), Carrot (1), Rolled oats (¼ cup), Onion (1), Ginger (1 inch), Green chilli (1), Coriander leaves (2 tbsp) |
+| Mini besan-veg cheela with mint-curd dip | Besan (gram flour) (¾ cup), Onion (1), Carrot (1), Coriander leaves (2 tbsp), Curd (½ cup, for dip), Mint (1 handful, for dip) *(optional)* |
+| Protein-chia energy balls (2) | Dates (12), Rolled oats (½ cup), Almonds (¼ cup), Chia seeds (1 tbsp), Protein powder (Cosmix) (1 scoop (adults only)), Cocoa powder (1 tbsp) *(optional)* |
+| Masala corn cup | Sweet corn (frozen) (1½ cups), Lemon (1), Onion (¼) *(optional)*, Coriander leaves (1 tbsp) *(optional)* |
+| Air-fried tortilla pizza | Whole-wheat tortillas (2), Tomato (2, for sauce), Garlic (2 cloves), Paneer (80 g), Mushroom (50 g), Capsicum (½), Baby corn (2) *(optional)*, Cheese (a small sprinkle) *(optional)* |
+| Air-fried spiced chickpeas | Chickpeas (dry, kabuli chana) (1 cup, soaked and cooked) |
+| Air-fried crunchy green peas | Peas (frozen) (1½ cups) |
+| Air-fried moong dal namkeen | Moong dal (split) (¾ cup, soaked and dried) |
+| Air-fried almond + seed mix | Almonds (25), Pumpkin seeds (3 tbsp), Makhana (fox nuts) (1 cup) |
+
+### Toddler egg ideas
+
+| Recipe | Ingredients |
+|---|---|
+| Banana-oat-cocoa pancakes | Banana (1-2), Eggs (2), Rolled oats (⅓ cup), Cocoa powder (1 tsp), Chia seeds (1 tsp, soaked) *(optional)* |
+| Veg omelette | Eggs (2), Carrot (1 tbsp grated) *(optional)*, Spinach (1 tbsp chopped) *(optional)*, Capsicum (1 tbsp chopped) *(optional)* |
+| Soft scrambled eggs | Eggs (2), Sourdough bread (1 slice, as toast fingers) *(optional)* |
+| Mini egg muffins (air fryer) | Eggs (6), Carrot (1), Capsicum (½), Spinach (1 handful) *(optional)*, Onion (½) *(optional)*, Coriander leaves (1 tbsp) *(optional)* |
+<!-- ingredients:end -->
 
 ## Suggested additions to groceries (optional)
 | Item | Why |
